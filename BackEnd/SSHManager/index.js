@@ -2,12 +2,14 @@ const { Client } = require('ssh2');
 
 class SSHManager {
 
-  constructor() {
+  constructor(olt_Config) {
+    
+    this.config = olt_Config;
     this.conn = new Client();
     this.connected = false;
     this.hostname = 'MA5800-X17';
-    this.regex = ['display sysuptime','display ont autofind all'];
-    this.commandList = ['Comando 1', 'Comando 2',];
+    this.regex = ['display ont autofind all'];
+    this.commandList = ['Comando 1'];
     this.matchCommand = 0;
     this.commandCounter = 0;
 
@@ -21,9 +23,9 @@ class SSHManager {
     this.commandInProgress = false;
   }
 
-  connect({ host, port, username, password }) {
+  connect() {
     if (!this.connected) {
-      this.conn.connect({ host, port, username, password });
+      this.conn.connect( this.config );
     }
   }
 
@@ -50,7 +52,7 @@ class SSHManager {
   _processCommandQueue() {
     
     const { command, callback } = this.commandsQueue.shift();
-    this.conn.shell((error,stream) => {
+    this.conn.shell((error, stream) => {
   
       var output = [];
       let preout = ''
@@ -84,20 +86,20 @@ class SSHManager {
   
 }
 
+// Configurações da OLT:
+const oltA_config = {
+  host: 'oltHost',
+  port: 22,
+  username: 'username',
+  password: 'passwrd',
+};
 
 // Exemplo de uso:
-const sshManager = new SSHManager();
+const oltA = new SSHManager( oltA_config );
+// oltA.connect();
 
-// Conectar ao SSH
-sshManager.connect({
-  host: 'host',
-  port: 22,
-  username: 'user',
-  password: 'pass',
-});
-
-// Adicionar comandos à fila
-sshManager.addToQueue('en\nconfig\ndisplay sysuptime\n\ndisplay ont autofind all | no-more\n\n', (err, output) => {
+// // Adicionar comandos à fila
+oltA.addToQueue('en\nconfig\ndisplay ont autofind all | no-more\n\n | include SN', (err, output) => {
   if (err) {
     console.error('Erro ao executar comando:', err);
   } else {
