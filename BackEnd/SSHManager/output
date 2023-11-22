@@ -1,0 +1,25 @@
+##Discovery ONTs:
+outfound = [
+  'Saida do Comando [1]:    ----------------------------------------------------------------------------\r\n' +
+    '   Number              : 1\r\n' +
+    '   F/S/P               : 0/18/14\r\n' +
+    '   Ont SN              : HWTCD0E68F85\r\n' +
+    '   Password            : 0x6935313735323835667A(i5175285fz)\r\n' +
+    '   Loid                : \r\n' +
+    '   Checkcode           : \r\n' +
+    '   VendorID            : HWTC\r\n' +
+    '   Ont Version         : 6A5.A\r\n' +
+    '   Ont SoftwareVersion : V3R017C00S100\r\n' +
+    '   Ont EquipmentID     : HG8310M\r\n' +
+    '   Ont Customized Info : COMMON\r\n' +
+    '   Ont autofind time   : 2023-11-22 01:22:04-03:00\r\n' +
+    '   ----------------------------------------------------------------------------\r\n',
+  'Saida do Comando [1]:    The number of GPON autofind ONT is 1',
+  'Saida do Comando [1]: \r\n\r\nMA5800-X17(config)#'
+]
+
+outNotFound = [
+  'Saida do Comando [1]:   Failure: The automatically found ONTs do not exist',
+  'Saida do Comando [1]: \r\n',
+  'Saida do Comando [1]: \r\nMA5800-X17(config)#'
+]
