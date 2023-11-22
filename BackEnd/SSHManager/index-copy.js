@@ -30,8 +30,8 @@ conn.on('ready', () => {
   });
 
 }).connect({
-  host: '10.115.10.2',
+  host: '1.1.1.1',
   port: 22,
-  username: 'suporte',
-  password: '124578net'
+  username: 'user',
+  password: 'passwrd'
 });
