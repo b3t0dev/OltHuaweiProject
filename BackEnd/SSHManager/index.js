@@ -1,3 +1,10 @@
+process.on('uncaughtException', (err) => {
+  // console.error('Exceção não tratada:', err.message);
+  // console.error('Tipo de Erro:', err.name);
+  // console.error('Mensagem de Erro:', err.message);
+  // console.error('Stack Trace:', err.stack);
+});
+
 const { Client } = require('ssh2');
 
 class SSHManager {
@@ -8,55 +15,58 @@ class SSHManager {
     this.conn = new Client();
     this.connected = false;
     this.hostname = 'MA5800-X17';
-    this.regex = ['display ont autofind all'];
-    this.commandList = ['Comando 1'];
+    this.regex = [];
     this.matchCommand = 0;
-    this.commandCounter = 0;
-
-    this.conn.on('ready', () => {
-      console.log('Conexão Estabelecida');
-      this.connected = true;
-      this._processCommandQueue(); // Processar comandos pendentes quando a conexão está pronta
-    });
-    
+    this.commandCounter = 0;   
     this.commandsQueue = [];
-    this.commandInProgress = false;
   }
 
   connect() {
     if (!this.connected) {
       this.conn.connect( this.config );
+      this.connected = true;
     }
   }
 
-  // executeCommand(command, callback) {
-  //   if (this.connected) {
-  //     // this.commandList[0] = command;
-  //     // this.regex[0] = command;
-  //     this.commandsQueue.push({ command, callback });
-
-  //     if (!this.commandInProgress) {
-  //       this._processCommandQueue();
-  //     }
-  //   } 
-  // }
-
-  addToQueue(command, callback) {
-    this.commandsQueue.push({ command, callback });
-
+  disconnect() {
     if (this.connected) {
-      this._processCommandQueue();
+      this.connected = false;
+      this.hostname = 'MA5800-X17';
+      this.regex = [];
+      this.matchCommand = 0;
+      this.commandCounter = 0;   
+      this.commandsQueue = [];
+      this.conn.end();
     }
   }
 
-  _processCommandQueue() {
+  addToQueue(comandos, callback) {
+
+    const preComand = 'en\nconfig\n'
+    const posComand = ' | no-more\n\n'
+    let command = '';
+    command += preComand;
+
+    for (let cmd = 0; cmd < comandos.length; cmd++) {
+      command += comandos[cmd] + posComand;
+      this.regex.push(comandos[cmd]);
+    }
+    // console.log(this.regex)
+    if (this.connected) {
+      this.conn.on('ready', () => {
+        console.log('Conexão Estabelecida');
+        this._processCommandQueue(command, callback);
+      });
+    }
+  }
+
+  _processCommandQueue(command, callback) {
     
-    const { command, callback } = this.commandsQueue.shift();
     this.conn.shell((error, stream) => {
   
       var output = [];
       let preout = ''
-      stream    
+      stream
       .on('data', (data) => {
         preout = 'OUTPUT: ' + String(data); // O Stdout é retornado um Object()
         // console.log(preout); // Ativar para exibir todas as saidas (For DeBug)
@@ -64,7 +74,6 @@ class SSHManager {
         if ( this.matchCommand == 1 ){
           output.push(`Saida do Comando [${this.commandCounter}]: ` + data);
           if (preout.match(this.hostname + '.{1,}')){
-            this.commandList.shift();
             this.regex.shift();
             this.matchCommand = 0;
           }
@@ -74,12 +83,15 @@ class SSHManager {
           this.matchCommand = 1;
           this.commandCounter += 1;
         }
-        if ( preout.match(this.hostname + '.{1,}') && ( this.commandList.length == 0 ) ){
-          console.log(output);
-          // console.log(preout);
+        if ( preout.match(this.hostname + '.{1,}') && ( this.regex.length == 0 ) ){
+          // console.log(output);
+          callback(null, output);
+          this.disconnect();
         }
 
+        
         });
+        
       stream.end(command);
     });
   }
@@ -88,18 +100,19 @@ class SSHManager {
 
 // Configurações da OLT:
 const oltA_config = {
-  host: 'oltHost',
+  host: '1.1.1.1',
   port: 22,
-  username: 'username',
-  password: 'passwrd',
+  username: 'user',
+  password: 'password',
 };
 
-// Exemplo de uso:
+// Criando objeto(OLT) passando as configurações para a classe executar os métodos
 const oltA = new SSHManager( oltA_config );
-// oltA.connect();
+const comandos = ['display ont autofind all','display sysuptime'];
+oltA.connect();
 
-// // Adicionar comandos à fila
-oltA.addToQueue('en\nconfig\ndisplay ont autofind all | no-more\n\n | include SN', (err, output) => {
+// Executar o comando
+oltA.addToQueue(comandos, (err, output) => {
   if (err) {
     console.error('Erro ao executar comando:', err);
   } else {
@@ -109,3 +122,20 @@ oltA.addToQueue('en\nconfig\ndisplay ont autofind all | no-more\n\n | include SN
 
 });
 
+
+// setTimeout(function (){
+//   console.log("Iniciando o 2° Comando");
+//   oltA.connect();
+// // Executar abaixo o comando
+//   oltA.addToQueue('en\nconfig\ndisplay ont autofind all | no-more\n\n ', (err, output) => {
+//     if (err) {
+//       console.error('Erro ao executar comando:', err);
+//     } else {
+//       console.log('Saída do comando:', output);
+//       // oltA.disconnect();
+
+//   }
+
+//   });
+
+// },10000);
