@@ -5,6 +5,7 @@ process.on('uncaughtException', (err) => {
   // console.error('Stack Trace:', err.stack);
 });
 
+require('custom-env').env('config')
 const { Client } = require('ssh2');
 
 class SSHManager {
@@ -100,10 +101,10 @@ class SSHManager {
 
 // Configurações da OLT:
 const oltA_config = {
-  host: '1.1.1.1',
-  port: 22,
-  username: 'user',
-  password: 'password',
+  host: process.env.OLT_Address,
+  port: process.env.OLT_Port,
+  username: process.env.OLT_User,
+  password: process.env.OLT_Password,
 };
 
 // Criando objeto(OLT) passando as configurações para a classe executar os métodos

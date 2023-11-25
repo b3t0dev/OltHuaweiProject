@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "custom-env": "^2.0.2",
     "ssh2": "^1.14.0"
   }
 }
