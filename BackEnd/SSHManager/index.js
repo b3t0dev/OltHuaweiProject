@@ -21,6 +21,7 @@ class SSHManager {
     this.commandCounter = 0;  
     this.commandError = 'Unknown command, the error' 
     this.commandsQueue = [];
+    this.endComands = 0;
   }
 
   connect() {
@@ -78,12 +79,17 @@ class SSHManager {
       .on('data', (data) => {
         preout = 'OUTPUT: ' + String(data); // O Stdout é retornado um Object()
         // console.log(preout); // Ativar para exibir todas as saidas (For DeBug)
+        // console.log(output); // ||
 
-        if (preout.match(this.commandError)){
+        if (preout.match(this.commandError) ){
           const errorSaida = 'Comando não encontrado'
           output.push(errorSaida)
-          callback(null, output);
-          // this.disconnect();
+          this.regex.shift();
+          this.matchCommand = 0;
+          if (this.regex.length == 0){
+            this.endComands = 1;
+          }
+
         }
 
         if ( this.matchCommand == 1 ){
@@ -103,17 +109,20 @@ class SSHManager {
           if (preout.match(this.hostname + '.{1,}')){
             this.regex.shift();
             this.matchCommand = 0;
+            if ( this.regex.length == 0 ) {
+              this.endComands = 1;
+            }
           }
         }
-
+        
         if ( (this.regex[0] && preout.match(this.regex[0])) ){
           this.matchCommand = 1;
           this.commandCounter += 1;
         }
-        if ( preout.match(this.hostname + '.{1,}') && ( this.regex.length == 0 ) ){
-          // console.log(output)
-          callback(null, output);
+        if ( preout.match(this.hostname + '.{1,}') && ( this.regex.length == 0 ) && this.endComands == 1 ){
+          this.endComands = 0
           this.disconnect();
+          return callback(null, output);
         }
 
         });
@@ -134,7 +143,7 @@ const oltA_config = {
 
 // Criando objeto(OLT) passando as configurações para a classe executar os métodos
 const oltA = new SSHManager( oltA_config );
-const comandos = ['display optversion'];
+const comandos = ['display ont autofind all', 'display erado', 'display sysuptime'];
 oltA.connect();
 
 // Executar o comando
