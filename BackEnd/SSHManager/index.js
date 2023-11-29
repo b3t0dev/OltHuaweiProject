@@ -157,20 +157,3 @@ oltA.addToQueue(comandos, (err, output) => {
 
 });
 
-
-// setTimeout(function (){
-//   console.log("Iniciando o 2° Comando");
-//   oltA.connect();
-// // Executar abaixo o comando
-//   oltA.addToQueue('en\nconfig\ndisplay ont autofind all | no-more\n\n ', (err, output) => {
-//     if (err) {
-//       console.error('Erro ao executar comando:', err);
-//     } else {
-//       console.log('Saída do comando:', output);
-//       // oltA.disconnect();
-
-//   }
-
-//   });
-
-// },10000);
