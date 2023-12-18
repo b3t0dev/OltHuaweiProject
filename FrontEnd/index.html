@@ -1,72 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
+<html lang="en">
+<head> 
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>ONU Huawei Management</title>
 </head>
-<body>
-    <span id="iconHead"><iconify-icon id="iconHead" icon="simple-icons:huawei" style="color: maroon;" width="150" height="150"></iconify-icon></span>
-    <div class="container">
-        <div class="content first-content">
-            <div class="first-column">
-                <h2 class="title title-primary">Bem vindo!</h2>
-                <p class="description description-primary">Conecte-se a nossa API</p>
-                <p class="description description-primary">Forneça suas informações</p>
-                <button id="signin" class="btn btn-primary">Login</button>
-            </div>    
-            <div class="second-column" id="second-colum">
-                <h2 class="title title-second">Registrar-se</h2>
-                <p class="description description-second">Registre-se com suas credenciais:</p>
-                <form class="form" id="registryForm" onsubmit="regUser(event)">
-                    <label class="label-input" for="">
-                        <i class="far fa-user icon-modify"></i>
-                        <input id="nameRegForm" type="text" placeholder="Name">
-                    </label>
-                    
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
-                        <input id="emailRegForm" type="email" placeholder="Email">
-                    </label>
-                    
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
-                        <input id="passRegForm" type="password" placeholder="Password">
-                    </label>
-                    
-                    <button class="btn btn-second">Sing up</button>        
-                </form>
-            </div><!-- second column -->
-        </div><!-- first content -->
-        <div class="content second-content">
-            <div class="first-column">
-                <h2 class="title title-primary">Olá!</h2>
-                <p class="description description-primary">Registre-se caso não possua </p>
-                <p class="description description-primary">uma conta registrada</p>
-                <button id="signup" class="btn btn-primary">sing up</button>
+
+<body>   
+  
+    <div class="d-flex justify-content-center ">
+        
+        <div class="p-5 my-5 rounded" id="loginHeader"> 
+            <h2 style="text-align: center; color:#5c636a;"> ONU Management </h2>
+            <iconify-icon icon="simple-icons:huawei" style="color: maroon;" width="250" height="250"></iconify-icon>
+            <div id="loginforms">
+                
+                <p class="fw-bold" style="text-align: center; color: #5c636a;">
+                        Login Credentials
+                </p>
+                <div class="form-floating mb-2">
+                    <input type="email" class="form-control" placeholder="Email" id="formlogin">
+                    <label for="floatingInput">User</label>
+                </div>
+                <div class="form-floating">
+                    <input type="password" class="form-control" placeholder="Password" id="formpassword">
+                    <label for="floatingPassword">Password</label>
+                </div>
+                <a href="./pages/Tela1/index.html">
+                <button type="button" class="btn btn-secondary my-2">Submit</button>
+                </a>
             </div>
-            <div class="second-column">
-                <h2 class="title title-second">Entrar</h2>
-                <p class="description description-second">Forneça suas credenciais:</p>
-                <form id="loginForm" class="form" onsubmit="login(event)">
-                    <label class="label-input" for="">
-                        <i class="far fa-envelope icon-modify"></i>
-                        <input id="loginEmail" onclick="clearError()" type="email" placeholder="Email">
-                    </label>
-                    
-                    <label class="label-input" for="">
-                        <i class="fas fa-lock icon-modify"></i>
-                        <input id="loginPass" onclick="clearError()" type="password" placeholder="Password">
-                    </label>
-                        <h4 id="loginError" style="text-align: center; color: rgb(92, 17, 7);" ></h4>
-                    <button class="btn btn-second">sign in</button>
-                </form>
-            </div><!-- second column -->
-        </div><!-- second-content -->
+        </div>
     </div>
-    <script src="./js/login.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>
