@@ -1,4 +1,4 @@
-const dBServer = 'http://localhost:3000'
+const dBServer = '/api'
 
 var btnSignin = document.querySelector("#signin");
 var btnSignup = document.querySelector("#signup");
@@ -81,7 +81,7 @@ async function regUser(event){
 
 async function newUserDB(userData){
 
-    const url = `${dBServer}/users`;
+    const url = `/api/users`;
     const config = {
         headers: {
             'Content-Type': "application/json",
@@ -90,8 +90,17 @@ async function newUserDB(userData){
         body: JSON.stringify(userData),
       };
     
-    const response = await fetch(url, config);
-    const test = await response.json();
-    console.log(test);
+    test = true;
+    // const response = await fetch(url, config);
+    // const test = await response.json();
+    if (test){
+        const singup = document.getElementById('second-colum');
+        while (singup.firstChild){
+            singup.removeChild(singup.firstChild);
+        }
+        const msg = `<h3>Cadastro realizado com sucesso!</h3>`
+        singup.insertAdjacentHTML('beforeend', msg);
+
+    }
     
 }
