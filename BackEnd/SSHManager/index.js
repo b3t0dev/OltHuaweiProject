@@ -143,7 +143,7 @@ const oltA_config = {
 
 // Criando objeto(OLT) passando as configurações para a classe executar os métodos
 const oltA = new SSHManager( oltA_config );
-const comandos = ['display ont autofind all', 'display erado', 'display sysuptime'];
+const comandos = ['display ont autofind all'];
 oltA.connect();
 
 // Executar o comando

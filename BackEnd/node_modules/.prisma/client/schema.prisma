@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// npx prisma studio - this is command open webserver
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    Int     @id @default(autoincrement())
+  name  String
+  email String  @unique
+  password String
+}
+
+model oltFound {
+  id          Int     @id @default(autoincrement())
+  status      Boolean @default(false)
+  OltName     String  @unique
+  Armario     String
+  PowerdB     String
+  maxClients  String
+  ipAddress   String  @unique
+  slots       slotsOLT[]
+}
+
+model slotsOLT {
+  id              Int     @id @default(autoincrement())
+  status          Int
+  slot            String
+  OnuDiscovery    Int
+  OnuProvisioned  Int
+  OnuOnline       Int
+  olt             oltFound  @relation(fields: [oltId], references: [id])
+  oltId           Int
+  
+}

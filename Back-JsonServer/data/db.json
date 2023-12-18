@@ -1,0 +1,169 @@
+{
+    "OLTs":
+    [
+        {
+            "id": 1,
+            "status": 1,
+            "OltName": "OltA",
+            "Armario": "POP MatrizA",
+            "PowerdB": "+5dBm",
+            "maxClients": 64,
+            "ipAddress":"127.0.0.1",
+            "Config": "",
+            "OltID": "OltA"
+
+        },
+        {
+            "id": 2,
+            "status": 0,
+            "OltName": "OltB",
+            "Armario": "POP MatrizB",
+            "PowerdB": "+4dBm",
+            "maxClients": 128,
+            "ipAddress": "127.0.0.2",
+            "Config": "",
+            "OltID": "OltB"
+        },
+        {
+            "id": 3,
+            "status": 1,
+            "OltName": "OltC",
+            "Armario": "POP MatrizC",
+            "PowerdB": "+3dBm",
+            "maxClients": 256,
+            "ipAddress": "127.0.0.3",
+            "Config": "",
+            "OltID": "OltC"
+        }
+    ],
+
+    "SLOTS":
+
+    [
+        {
+            "OLTId": 1,
+            "OltID": "OltA",
+            "slot":	"0/19",
+            "status": 1,
+            "OnuDiscovery": 1,
+            "OnuProvisioned": 78,
+            "OnuOnline": 24,	
+            "Options": ""
+        },
+        {
+            "OLTId": 1,
+            "OltID": "OltA",
+            "slot":	"0/18",
+            "status": 1,
+            "OnuDiscovery": 0,
+            "OnuProvisioned": 200,
+            "OnuOnline": 100,	
+            "Options": ""
+        },    
+        {
+            "OLTId": 1,
+            "OltID": "OltA",
+            "slot":	"0/17",
+            "status": 1,
+            "OnuDiscovery": 1,
+            "OnuProvisioned": 500,
+            "OnuOnline": 350,	
+            "Options": ""
+        },
+        {
+            "OLTId": 1,
+            "OltID": "OltA",
+            "slot":	"0/16",
+            "status": 1,
+            "OnuDiscovery": 0,
+            "OnuProvisioned": 78,
+            "OnuOnline": 24,	
+            "Options": ""
+        },
+        {
+            "OLTId": 1,
+            "OltID": "OltA",
+            "slot":	"0/15",
+            "status": -1,
+            "OnuDiscovery": "-",
+            "OnuProvisioned": "-",
+            "OnuOnline": "-",	
+            "Options": "-"
+        },
+        {
+            "OLTId": 1,
+            "OltID": "OltA",
+            "slot":	"0/19",
+            "status": -1,
+            "OnuDiscovery": "-",
+            "OnuProvisioned": "-",
+            "OnuOnline": "-",
+            "Options": ""
+        },
+        {
+            "OLTId": 2,
+            "OltID": "OltB",
+            "slot": "0/10",
+            "status": 0,
+            "OnuDiscovery": "-",
+            "OnuProvisioned": "-",
+            "OnuOnline": "-",
+            "Options": ""
+        },
+        {
+            "OLTId": 3,
+            "OltID": "OltC",
+            "slot":	"0/19",
+            "status": 0,
+            "OnuDiscovery": 2000,
+            "OnuProvisioned": 100,
+            "OnuOnline": 50,	
+            "Options": ""
+        },
+        {
+            "OLTId": 3,
+            "OltID": "OltC",
+            "slot":	"0/1",
+            "status": 1,
+            "OnuDiscovery": 150,
+            "OnuProvisioned": 200,
+            "OnuOnline": 39,	
+            "Options": ""
+        },    
+        {
+            "OLTId": 3,
+            "OltID": "OltC",
+            "slot":	"0/3",
+            "status": 1,
+            "OnuDiscovery": 80,
+            "OnuProvisioned": 40,
+            "OnuOnline": 24,	
+            "Options": ""
+        }       
+    ],
+
+    "Users":
+        [
+            {
+                "userName": "icaro",
+                "userPassword": "123",
+                "userEmail": "icaro@icaro.com.br"
+            },
+            {
+                "userName": "beto",
+                "userPassword": "321",
+                "userEmail": "beto@beto.com.br"
+            },
+            {
+                "userName": "michael",
+                "userPassword": "132",
+                "userEmail": "michael@michael.com.br"
+            },            
+            {
+                "userName": "aluno",
+                "userPassword": "aluno",
+                "userEmail": "ifpb@ifpb.edu.br"
+            }
+
+        ]
+}
