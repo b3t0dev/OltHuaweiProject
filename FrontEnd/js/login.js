@@ -21,43 +21,39 @@ inputPassword.addEventListener("click", function () {
     clearError();
 })
 
-function login(){
+async function login(){
     // event.preventDefault();
-    const email = document.getElementById('formlogin').value
-    const pass = document.getElementById('formpassword').value
-
-    console.log(email, pass)
+    const name = document.getElementById('formlogin').value
+    const password = document.getElementById('formpassword').value
     
-    const data = { email, pass };
-    users(data);
-
-}
-
-async function buscarnoBanco(){
-    const url = `${dBServer}/users`
-    const usuarios = await fetch(url);
-    return await usuarios.json()
-
-
-}
-
-async function users(dataform) {
-    const dbusers = await buscarnoBanco();
-    if (validateLogin(dataform, dbusers)){
-        logado()
+    const data = { name, password };
+    const url = `${dBServer}/user`
+    const login = await buscarnoBanco(url, data);
+    if (login){
+        logado();
     } else {
         erroLogin();
     }
+
 }
 
-function validateLogin(dataform, dbusers){
+async function buscarnoBanco(url, dataLogin){
 
-    for (const user of dbusers){
-        if ((dataform.email === user.email) && (dataform.pass === user.password)){
-            return true;
-        }
+    const configRequest = {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataLogin),
+      };
+
+    const login = await (await fetch(url, configRequest)).json();
+    if (login == "Acessou") {
+        return true;
+    } else {
+        return false;
     }
-    return false;
+
 }
 
 function logado(){
@@ -84,7 +80,7 @@ async function regUser(event){
     const teste = await newUserDB(newUser);
 }
 
-async function newUserDB(userData){
+async function newUserDB(userData){ // Terminar..
 
     const url = `/api/users`;
     const config = {

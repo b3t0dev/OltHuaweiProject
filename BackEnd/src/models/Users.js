@@ -32,6 +32,18 @@ async function read(id) {
   return user;
 }
 
+async function readByUser(dbuser){
+  const name = dbuser.name;
+  const usuario = await prisma.user.findFirst({
+    where: {
+      name,
+    },
+  });
+  const hash = usuario.password;
+  const match = await bcrypt.compare(dbuser.password, hash);
+  return match;
+}
+
 async function update(user, id) {
   const newUser = await prisma.user.update({
     data: user,
@@ -49,12 +61,15 @@ async function remove(id) {
       id,
     },
   });
+
+  return true;
 }
 
 export default {
   create,
   readAll,
   read,
+  readByUser,
   update,
   remove,
 };

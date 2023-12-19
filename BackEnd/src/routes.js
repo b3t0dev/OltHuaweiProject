@@ -3,6 +3,7 @@ import express from 'express';
 import Users from './models/Users.js';
 import Olt from './models/Olts.js';
 import Slots from './models/Slots.js';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
@@ -114,7 +115,8 @@ router.get('/olts/:id', async (req, res) => {
     throw new HTTPError('Invalid id to read host', 400);
   }
 });
-// Get User ByID ()
+
+// Get User ByID (x)
 router.get('/users/:id', async (req, res) => {
   const id = Number(req.params.id);
 
@@ -127,7 +129,25 @@ router.get('/users/:id', async (req, res) => {
   }
 });
 
-// Update User ByID ()
+// Get User ByUser(x)
+router.post('/user', async (req, res) => {
+  try {
+    const usuario = req.body;
+  
+    const user = await Users.readByUser(usuario);
+  
+    if (user) {
+      res.json("Acessou");
+    } else {
+      res.json("Erro de Login")
+    }
+    
+  } catch (error) {
+    res.status(200).json({ error: 'Erro de Login' });
+  }
+});
+
+// Update User ByID (x)
 router.put('/users/:id', async (req, res) => {
   const id = Number(req.params.id);
 
@@ -142,7 +162,7 @@ router.put('/users/:id', async (req, res) => {
   }
 });
 
-// Delete User ByID ()
+// Delete User ByID (x)
 router.delete('/users/:id', async (req, res) => {
   const id = Number(req.params.id);
 

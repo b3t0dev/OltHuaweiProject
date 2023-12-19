@@ -8,9 +8,20 @@ POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "name": "ClaroTeste",
-  "email": "claro@claro2.com.br",
-  "password": "claro2password"
+  "name": "michael",
+  "password": "notex021",
+  "privilege": 1
+}
+
+### Get(post) user by User
+
+# @name getUser
+POST {{baseUrl}}/user
+Content-Type: application/json
+
+{
+  "name": "michael",
+  "password": "notex021"
 }
 
 ### Create Olt
@@ -45,7 +56,7 @@ Content-Type: application/json
 ### Show All Slots
 
 # @name viewAllSlots
-GET {{baseUrl}}/users/7
+GET {{baseUrl}}/users/
 
 ### Get Slot ByID
 GET {{baseUrl}}/olts/1/slots
@@ -58,14 +69,15 @@ GET {{baseUrl}}/users/7
 
 ### Update a host
 
-PUT {{baseUrl}}/users/{{createdHostId}}
+PUT {{baseUrl}}/users/1
 Content-Type: application/json
 
 {
-  "name": "Google Search",
-  "address": "www.google.com"
+  "name": "beto",
+  "password": "123",
+  "privilege": 0
 }
 
 ### Delete a host
 
-DELETE {{baseUrl}}/olts/10/slots
+DELETE {{baseUrl}}/users/12
