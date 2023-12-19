@@ -15,24 +15,27 @@
             <h2 style="text-align: center; color:#5c636a;"> ONU Management </h2>
             <iconify-icon icon="simple-icons:huawei" style="color: maroon;" width="250" height="250"></iconify-icon>
             <div id="loginforms">
-                
-                <p class="fw-bold" style="text-align: center; color: #5c636a;">
+                <!-- <form class="form" id="registryForm" onsubmit="regUser(event)">    -->
+                    <p class="fw-bold" style="text-align: center; color: #5c636a;">
                         Login Credentials
-                </p>
-                <div class="form-floating mb-2">
-                    <input type="email" class="form-control" placeholder="Email" id="formlogin">
-                    <label for="floatingInput">User</label>
-                </div>
-                <div class="form-floating">
-                    <input type="password" class="form-control" placeholder="Password" id="formpassword">
-                    <label for="floatingPassword">Password</label>
-                </div>
-                <a href="./pages/Tela1/index.html">
-                <button type="button" class="btn btn-secondary my-2">Submit</button>
-                </a>
+                    </p>
+                    <p class="fw-bold text-center" style="color: rgb(239, 18, 18);" id="loginError">
+                    </p>
+                    <div class="form-floating mb-2">
+                        <input type="email" class="form-control" placeholder="Email" id="formlogin">
+                        <label for="floatingInput">User</label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" placeholder="Password" id="formpassword">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <!-- <a href="./pages/Tela1/index.html"> -->
+                    <button type="button" class="btn btn-secondary my-2" id="signin">Submit</button>
+                    </a>
+                </form>
             </div>
         </div>
     </div>
-    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/login.js"></script>
 </body>
 </html>

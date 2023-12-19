@@ -1,25 +1,34 @@
+import '../css/style.css'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'iconify-icon'
+
 const dBServer = '/api'
 
 var btnSignin = document.querySelector("#signin");
-var btnSignup = document.querySelector("#signup");
-
-var body = document.querySelector("body");
-
+var inputLogin = document.querySelector("#formlogin");
+var inputPassword = document.querySelector("#formpassword");
 
 btnSignin.addEventListener("click", function () {
-   body.className = "sign-in-js"; 
+   login(); 
 });
 
-btnSignup.addEventListener("click", function () {
-    body.className = "sign-up-js";
+inputLogin.addEventListener("click", function () {
+    clearError();
 })
 
-function login(event){
-    event.preventDefault();
-    const email = document.getElementById('loginEmail').value
-    const pass = document.getElementById('loginPass').value
+inputPassword.addEventListener("click", function () {
+    clearError();
+})
+
+function login(){
+    // event.preventDefault();
+    const email = document.getElementById('formlogin').value
+    const pass = document.getElementById('formpassword').value
+
+    console.log(email, pass)
     
-    data = { email, pass };
+    const data = { email, pass };
     users(data);
 
 }
@@ -57,14 +66,10 @@ function logado(){
 
 function erroLogin(){
     const tagError = document.getElementById('loginError');
-
-    const form = document.getElementById('loginForm');
-    const loginField = document.getElementById('loginEmail');
-    const passwField = document.getElementById('loginPass');
     tagError.innerHTML = "Acesso Negado";
 }
 function clearError(){
-    const form = document.getElementById('loginError').innerText = '';
+    document.getElementById('loginError').innerText = '';
 
 }
 
