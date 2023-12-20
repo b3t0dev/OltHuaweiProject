@@ -1,7 +1,7 @@
 @baseUrl=http://localhost:3000
 @createdHostId = {{createHost.response.body.$.id}}
 
-### Create Host
+### Create Usuer
 
 # @name createUser
 POST {{baseUrl}}/users
@@ -32,11 +32,11 @@ Content-Type: application/json
 
 {
   "status": false,
-  "OltName": "OltD",
-  "Armario": "POP MatrizD",
+  "OltName": "OltDC",
+  "Armario": "POP MatrizD5",
   "PowerdB": "",
   "maxClients": "",
-  "ipAddress": ""
+  "ipAddress": "50.50.50.50"
 }
 
 
@@ -59,7 +59,7 @@ Content-Type: application/json
 GET {{baseUrl}}/users/
 
 ### Get Slot ByID
-GET {{baseUrl}}/olts/1/slots
+GET {{baseUrl}}/olts
 
 ### Get All Users
 GET {{baseUrl}}/users
@@ -80,4 +80,4 @@ Content-Type: application/json
 
 ### Delete a host
 
-DELETE {{baseUrl}}/users/12
+DELETE {{baseUrl}}/olts/12

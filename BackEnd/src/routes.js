@@ -40,6 +40,16 @@ router.post('/olts', async (req, res) => {
   }
 });
 
+// Delete Olt ByID (x)
+router.delete('/olts/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (id && (await Olt.remove(id))) {
+    res.sendStatus(200);
+  } else {
+    throw new HTTPError('Id is required to remove host', 400);
+  }
+});
+
 // Criar Slots Route (x)
 router.post('/slots', async (req, res) => {
   const slots = req.body;
@@ -116,6 +126,18 @@ router.get('/olts/:id', async (req, res) => {
   }
 });
 
+// Get Olt iD byName (x)
+router.get('/olts/id/:name', async (req, res) => {
+  const name = req.params.name;
+
+  const olt = await Olt.readName(name);
+  if (name && olt) {
+    res.json(olt);
+  } else {
+    throw new HTTPError('Invalid id to read host', 400);
+  }
+});
+
 // Get User ByID (x)
 router.get('/users/:id', async (req, res) => {
   const id = Number(req.params.id);
@@ -172,6 +194,18 @@ router.delete('/users/:id', async (req, res) => {
     throw new HTTPError('Id is required to remove host', 400);
   }
 });
+
+// Delete Olt ByID (x)
+router.delete('/olts/:id', async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (id && (await Olt.remove(id))) {
+    res.sendStatus(204);
+  } else {
+    throw new HTTPError('Id is required to remove host', 400);
+  }
+});
+
 
 // Delete Slot ByID (x)
 router.delete('/olts/:id/slots', async (req, res) => {

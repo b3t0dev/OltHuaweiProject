@@ -1,9 +1,9 @@
 import oltFunction from './oltFunctions.js';
 import states from './states.js';
 
-const urlDB = 'http://localhost:3000'
+const urlDB = '/api'
 
-function addOltConfigForm(event){
+async function addOltConfigForm(event){
     event.preventDefault();
 
     const OltName = document.getElementById('modal-olt-name').value;
@@ -11,13 +11,28 @@ function addOltConfigForm(event){
     const Armario = document.getElementById('modal-olt-armario').value;
     const PowerdB = document.getElementById('modal-olt-powerdb').value;
     const maxClients = document.getElementById('selected-maxclients-value').value;
-    const status = states.checkStatus(document.getElementById('flexSwitchCheckChecked').checked)
+    let status = states.checkStatus(document.getElementById('flexSwitchCheckChecked').checked)
+    if (status == 1){
+        status = true;
+    } else {
+        status = false;
+    }
 
-    const olt = { status, OltName, ipAddress, Armario, PowerdB, maxClients };
+    const olt = { status, OltName, Armario, PowerdB, maxClients, ipAddress };
 
     oltFunction.add_olt(urlDB, olt);
     const configsform = document.getElementById('formConfigModal');
     configsform.reset();
+
+    const configRequest = {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(olt),
+    };
+    
+    const newOlt = await fetch(`${urlDB}/olts`, configRequest);
 
 }
 

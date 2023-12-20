@@ -1,7 +1,7 @@
 import prisma from '../database/index.js';
 
 async function create(olt) {
-;
+
   const newOlt = await prisma.oltFound.create({
     data: olt
   });
@@ -25,6 +25,16 @@ async function read(id) {
   return host;
 }
 
+async function readName(OltName) {
+  const olt = await prisma.oltFound.findFirst({
+    where: {
+      OltName,
+    },
+  });
+
+  return olt;
+}
+
 async function update(host, id) {
   const newHost = await prisma.User.update({
     data: host,
@@ -37,17 +47,19 @@ async function update(host, id) {
 }
 
 async function remove(id) {
-  await prisma.User.delete({
+  await prisma.oltFound.delete({
     where: {
       id,
     },
   });
+  return true;
 }
 
 export default {
   create,
   readAll,
   read,
+  readName,
   update,
   remove,
 };

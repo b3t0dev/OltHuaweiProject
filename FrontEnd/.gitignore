@@ -2,4 +2,3 @@
 .env.config
 node_modules
 package-lock.json
-package.json

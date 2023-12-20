@@ -119,20 +119,41 @@ async function add_olt(ipDB, olt){
 
 function remove_olt(rmdata){
     const oltdata = rmdata.split('-', 3)
-    
     const modal_remove = document.getElementById('modalRemove');
     modal_remove.querySelector('h5').innerHTML = "Deseja realmente remover a " + oltdata[1] + "?";
     const buttonConfirm = document.getElementById('buttonDeleteConfirm');
     buttonConfirm.setAttribute('onclick', `confirmRemove("${rmdata}")`)
 
-
 }
 
-function confirmRemove(data){
+async function confirmRemove(data){
+  const oltdata = data.split('-', 3)
+
+  const Olt = await(
+    await fetch(`/api/olts/id/${oltdata[1]}`)
+    ).json();
+
+  const configRequest = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  };
+
+  const Slots = await (
+    await fetch(`/api/olts/${Olt.id}/slots`)
+  ).json()
+
   const olt = document.getElementById(data)
   olt.remove();
-  const oltslots = document.getElementById(data)
-  oltslots.remove();
+  await fetch(`/api/olts/${Olt.id}`, configRequest);
+
+  if (Slots.length != 0) {
+    const oltslots = document.getElementById(data)
+    oltslots.remove();
+  }
+  
+
 }
 
 async function configsOLT(ipDB, oltid){
