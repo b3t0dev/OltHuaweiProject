@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuarios</title>
+  </head>
+  <body>
+    <div id="main">
+
+      <div class="container" id="header">
+        <span id="iconHead"><iconify-icon id="iconHead" icon="simple-icons:huawei" style="color: maroon;" width="150" height="150"></iconify-icon></span>
+        <h2 style="text-align: center; color:#000000;"> ONU Management </h2>  
+          <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <div class="navbar-collapse d-flex"> 
+                <div class="d-flex me-auto" id="userLogged">
+                  UserLogged
+                </div>
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Menu
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <a class="btn btn-light d-flex justify-content-center" href="#" data-bs-toggle="modal" data-bs-target="#configModal">Principal</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider"></li>
+                      <li>
+                        <a class="btn btn-outline-danger d-flex justify-content-center" href="../../index.html" id="logoutButton">Logout</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        <h4 style="color: #5c636a;">Gerencia de Usuarios</h4>  
+      </div>
+
+      <div class="container" id="bodyList">
+        <table class="table table-responsive table-hover btn-light text-center">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Usuario</th>
+              <th scope="col">Ativo</th>
+              <th scope="col">Logado</th>
+              <th scope="col">Ultimo Login</th>
+              <th scope="col">Nivel</th>
+              <th scope="col">Config</th>
+              <th scope="col">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td>Michael</td>
+              <td>Sim</td>
+              <td>Sim</td>
+              <td>20/12/2023 17:50:50</td>
+              <td>Administrador</td>
+              <td>
+                <span class="clickIcon">
+                  <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
+                </span>
+              </td>
+              <td>
+                <span class="clickIcon clickDelete">
+                  <iconify-icon icon="bx:trash" width="27" height="22"></iconify-icon>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>2</th>
+              <td>Beto</td>
+              <td>Não</td>
+              <td>Não</td>
+              <td>20/12/2023 10:32:50</td>
+              <td>Administrador</td>
+              <td>
+                <span class="clickIcon">
+                  <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
+                </span>
+              </td>
+              <td>
+                <span>
+                  <iconify-icon icon="bx:trash" width="27" height="22" class="clickIcon clickDelete"></iconify-icon>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>3</th>
+              <td>Tony</td>
+              <td>Sim</td>
+              <td>Não</td>
+              <td>15/10/2023 22:00:50</td>
+              <td>Administrador</td>
+              <td>
+                <span class="clickIcon">
+                  <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
+                </span>
+              </td>
+              <td>                
+                <span>
+                  <iconify-icon icon="bx:trash" width="27" height="22" class="clickIcon clickDelete"></iconify-icon>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <th>4</th>
+              <td>Ismael</td>
+              <td>Sim</td>
+              <td>Não</td>
+              <td>19/10/2023 02:54:10</td>
+              <td>Padrão</td>
+              <td>
+                <span class="clickIcon">
+                  <a data-bs-toggle="modal" data-bs-target="#configModal">
+                    <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
+                  </a>
+                </span>
+              </td>
+              <td>
+                <span class="clickIcon clickDelete">
+                  <a data-bs-toggle="modal" data-bs-target="#modalRemove">
+                    <iconify-icon icon="bx:trash" width="27" height="22"></iconify-icon>
+                  </a>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+
+    <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="configModalLabel">Editar Usuario</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formConfigModal" onsubmit="addConfigsOLT(event)">
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label fw-bold">Usuario</label>
+                <span class="input-group-text">Usuario Clicado</span> 
+              </div>
+              <!-- <select class="form-select form-select mb-3" aria-label="Large select example">
+                <option value="1" selected>Padrão</option>
+                <option value="2">Administrador</option>
+              </select> -->
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">Nivel</label>
+                <select class="form-select" id="inputGroupSelect01">
+                  <option value="2" selected>Padrão</option>
+                  <option value="3">Administrador</option>
+                </select>
+              </div>
+              <div class="input-group mb-3">
+                <div class="input-group-text d-flex justify-content-between">
+                  <input class="form-check-input mt-0" type="checkbox" value="" aria-label="changePassword">
+                </div>
+                <input class="form-control" type="text" placeholder="Alterar Senha" aria-label="changePassword" disabled>
+              </div>              
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                <label class="form-check-label" for="flexSwitchCheckChecked">Ativo?</label>
+              </div>
+              
+              
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="modal fade" id="modalRemove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5">Remover Usuario</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <h5 text-center>Tem certeza que deseja remover este ususario?</h5>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="buttonDeleteConfirm" >Confirm</button>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
