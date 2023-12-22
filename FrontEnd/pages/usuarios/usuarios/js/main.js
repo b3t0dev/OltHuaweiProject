@@ -5,13 +5,15 @@ import 'iconify-icon'
 
 const chPasswordButton = document.querySelector("#changePassword");
 const activeUserButton = document.querySelector("#activeUser")
+let activeEye = false;
 
 const eyePasswordIcon = `<span class="eyepassword">
-                            <iconify-icon icon="mdi:eye-off-outline" width="25" height="25"></iconify-icon>
+                            <iconify-icon icon="mdi:eye-off-outline" width="25" height="25" id="eyeIcon"></iconify-icon>
                         </span>`
 
-// eyePasswordIconShow = <iconify-icon icon="fa-regular:eye"></iconify-icon>
-
+const eyePasswordIconShow = `<span class="eyepassword">
+                                <iconify-icon icon="fa-regular:eye" width="25" height="25" id="eyeIcon"></iconify-icon>
+                            </span>`
               
 const passInput = document.querySelector("#inputChgPassword");
 const divInput = document.querySelector("#labelInputPassword");
@@ -26,17 +28,41 @@ chPasswordButton.addEventListener("click", () => {
         passInput.setAttribute("Disabled","");
         divInput.removeAttribute("style");
         passInput.removeAttribute("style");
-        const eyePassword = document.querySelector(".eyepassword");
-        divInput.removeChild(eyePassword);
+        activeEye = false;
+        try {
+            const eyePassword = document.querySelector(".eyepassword");
+            divInput.removeChild(eyePassword);
+        } catch {}
     }
+    passInput.addEventListener("input", () => {
+        var input = passInput.value
+        if ((input.length == 1) && (activeEye == false)){
+            activeEye = true;
+            divInput.insertAdjacentHTML("beforeend",eyePasswordIcon);
+
+        }
+        if ( (activeEye == true) && (input.length == 0) ){
+            activeEye = false;
+            const eyePassword = document.querySelector(".eyepassword");
+            divInput.removeChild(eyePassword);
+        }
+
+    if (activeEye = true){
+        const eyeIcon = document.querySelector(".eyepassword");
+        eyeIcon.addEventListener("click", () => {
+            if (passInput.type == "password") {
+                passInput.type = "text";
+            } else {
+                // passInput.type = "password";
+                console.log("Algo");
+            }
+            // eyeIcon.removeChild(document.querySelector("#eyeIcon"));
+            // eyeIcon.insertAdjacentHTML("beforeend", eyePasswordIconShow);
+        });
+    }
+    });
 });
 
-passInput.addEventListener("input", () => {
-    var input = passInput.value
-    if (input.length < 2){
-        divInput.insertAdjacentHTML("beforeend",eyePasswordIcon);
-    }
-});
 
 // activeUserButton.addEventListener("click", () => {
 //     if (activeUserButton.checked) {
