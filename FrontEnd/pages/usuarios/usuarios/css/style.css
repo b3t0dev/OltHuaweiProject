@@ -7,6 +7,9 @@ body{
 
 }
 
+.addUserIcon {
+  cursor: pointer;
+}
 .testeinput {
   width: 100%;
   height: 100%;

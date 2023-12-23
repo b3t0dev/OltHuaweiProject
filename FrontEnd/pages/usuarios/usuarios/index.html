@@ -38,7 +38,12 @@
               </div>
             </div>
           </nav>
-        <h4 style="color: #5c636a;">Gerencia de Usuarios</h4>  
+        <div class="container d-flex ">
+          <h4 style="color: #5c636a;" class="container w-100 justify-content-center">Gerencia de Usuarios</h4>  
+          <a href="#" data-bs-toggle="modal" data-bs-target="#configModal">
+            <button type="button" class="btn btn-secondary" id="btnAddUser">+</button>
+          </a>
+        </div>
       </div>
 
       <div class="container" id="bodyList">
@@ -150,17 +155,17 @@
             <form id="formConfigModal" onsubmit="addConfigsOLT(event)">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label fw-bold">Usuario</label>
-                <span class="input-group-text">Usuario Clicado</span> 
+                <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" id="user_input" disabled>
               </div>
               <!-- <select class="form-select form-select mb-3" aria-label="Large select example">
                 <option value="1" selected>Padrão</option>
                 <option value="2">Administrador</option>
               </select> -->
               <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">Nivel</label>
-                <select class="form-select" id="inputGroupSelect01">
-                  <option value="2" selected>Padrão</option>
-                  <option value="3">Administrador</option>
+                <label class="input-group-text" for="nivelUser">Nivel</label>
+                <select class="form-select" id="nivelUser">
+                  <option value="1" selected>Padrão</option>
+                  <option value="2">Administrador</option>
                 </select>
               </div>
               <div class="input-group mb-3">
@@ -177,17 +182,12 @@
                   </div>
                 </div>
               
-              </div>   
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
               </div>
               <div class="form-check form-switch modal-footer">
                 <input class="form-check-input" type="checkbox" role="switch" id="activeUser">
                 <label class="form-check-label" for="activeUser">Usuario Ativo?</label>
               </div>
-              
-              
+                 
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>

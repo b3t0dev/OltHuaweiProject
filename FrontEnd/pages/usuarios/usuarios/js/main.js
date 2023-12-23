@@ -3,17 +3,25 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'iconify-icon'
 
+function get_FormUserConfig (){
+    const modal = document.getElementById("configModal");
+    const user = modal.querySelector("#user_input").value;
+    const nivel = modal.querySelector("#nivelUser").value;
+    const activeUser = modal.querySelector("activeUser").value;
+    
+}
+
 const chPasswordButton = document.querySelector("#changePassword");
 const activeUserButton = document.querySelector("#activeUser")
 let activeEye = false;
 
-const eyePasswordIcon = `<span class="eyepassword">
-                            <iconify-icon icon="mdi:eye-off-outline" width="25" height="25" id="eyeIcon"></iconify-icon>
-                        </span>`
+// const eyePasswordIcon = `<span class="eyepassword">
+//                             <iconify-icon icon="mdi:eye-off-outline" width="25" height="25" id="eyeIcon"></iconify-icon>
+//                         </span>`
 
-const eyePasswordIconShow = `<span class="eyepassword">
-                                <iconify-icon icon="fa-regular:eye" width="25" height="25" id="eyeIcon"></iconify-icon>
-                            </span>`
+// const eyePasswordIconShow = `<span class="eyepassword">
+//                                 <iconify-icon icon="fa-regular:eye" width="25" height="25" id="eyeIcon"></iconify-icon>
+//                             </span>`
               
 const passInput = document.querySelector("#inputChgPassword");
 const divInput = document.querySelector("#labelInputPassword");
@@ -28,39 +36,39 @@ chPasswordButton.addEventListener("click", () => {
         passInput.setAttribute("Disabled","");
         divInput.removeAttribute("style");
         passInput.removeAttribute("style");
-        activeEye = false;
-        try {
-            const eyePassword = document.querySelector(".eyepassword");
-            divInput.removeChild(eyePassword);
-        } catch {}
+        // activeEye = false;
+        // try {
+        //     const eyePassword = document.querySelector(".eyepassword");
+        //     divInput.removeChild(eyePassword);
+        // } catch {}
     }
-    passInput.addEventListener("input", () => {
-        var input = passInput.value
-        if ((input.length == 1) && (activeEye == false)){
-            activeEye = true;
-            divInput.insertAdjacentHTML("beforeend",eyePasswordIcon);
+    // passInput.addEventListener("input", () => {
+    //     var input = passInput.value
+    //     if ((input.length == 1) && (activeEye == false)){
+    //         activeEye = true;
+    //         divInput.insertAdjacentHTML("beforeend",eyePasswordIcon);
 
-        }
-        if ( (activeEye == true) && (input.length == 0) ){
-            activeEye = false;
-            const eyePassword = document.querySelector(".eyepassword");
-            divInput.removeChild(eyePassword);
-        }
+    //     }
+    //     if ( (activeEye == true) && (input.length == 0) ){
+    //         activeEye = false;
+    //         const eyePassword = document.querySelector(".eyepassword");
+    //         divInput.removeChild(eyePassword);
+    //     }
 
-    if (activeEye = true){
-        const eyeIcon = document.querySelector(".eyepassword");
-        eyeIcon.addEventListener("click", () => {
-            if (passInput.type == "password") {
-                passInput.type = "text";
-            } else {
-                // passInput.type = "password";
-                console.log("Algo");
-            }
-            // eyeIcon.removeChild(document.querySelector("#eyeIcon"));
-            // eyeIcon.insertAdjacentHTML("beforeend", eyePasswordIconShow);
-        });
-    }
-    });
+    // if (activeEye = true){
+    //     const eyeIcon = document.querySelector(".eyepassword");
+    //     eyeIcon.addEventListener("click", () => {
+    //         if (passInput.type == "password") {
+    //             passInput.type = "text";
+    //         } else {
+    //             // passInput.type = "password";
+    //             console.log("Algo");
+    //         }
+    //         // eyeIcon.removeChild(document.querySelector("#eyeIcon"));
+    //         // eyeIcon.insertAdjacentHTML("beforeend", eyePasswordIconShow);
+    //     });
+    // }
+    // });
 });
 
 
@@ -71,3 +79,13 @@ chPasswordButton.addEventListener("click", () => {
 //         activeUserButton.value = "false";
 //     }
 // });
+
+const btnAddUser = document.querySelector("#btnAddUser");
+btnAddUser.addEventListener("click", () => {
+    const modal = document.getElementById("configModal");
+    modal.querySelector("#configModalLabel").innerHTML = "Cadastrar Usuario";
+    modal.querySelector("#user_input").removeAttribute("disabled","");
+    const inputPass = document.querySelector("#changePassword");
+    inputPass.addEventListener("click","");
+
+});
