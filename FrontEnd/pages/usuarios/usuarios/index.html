@@ -41,7 +41,7 @@
         <div class="container d-flex ">
           <h4 style="color: #5c636a;" class="container w-100 justify-content-center">Gerencia de Usuarios</h4>  
           <a href="#" data-bs-toggle="modal" data-bs-target="#configModal">
-            <button type="button" class="btn btn-secondary" id="btnAddUser">+</button>
+            <button type="button" class="btn btn-secondary" id="btnAddUser" onclick="addUser()">+</button>
           </a>
         </div>
       </div>
@@ -152,7 +152,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formConfigModal" onsubmit="addConfigsOLT(event)">
+            <form id="submitModal" onsubmit="confirmModal(event, '0')">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label fw-bold">Usuario</label>
                 <input type="text" class="form-control" placeholder="Usuario" aria-label="Usuario" id="user_input" disabled>
@@ -168,7 +168,7 @@
                   <option value="2">Administrador</option>
                 </select>
               </div>
-              <div class="input-group mb-3">
+              <div class="input-group mb-3 password-labels">
                 
                 <div class="d-flex w-100">
                   <div class="input-group-text d-flex justify-content-between">
@@ -180,8 +180,8 @@
                       <iconify-icon icon="mdi:eye-off-outline" width="25" height="25"></iconify-icon>
                     </span> -->
                   </div>
-                </div>
-              
+                </div>      
+ 
               </div>
               <div class="form-check form-switch modal-footer">
                 <input class="form-check-input" type="checkbox" role="switch" id="activeUser">

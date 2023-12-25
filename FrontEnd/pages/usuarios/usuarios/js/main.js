@@ -11,81 +11,89 @@ function get_FormUserConfig (){
     
 }
 
+let charInput = false;
 const chPasswordButton = document.querySelector("#changePassword");
-const activeUserButton = document.querySelector("#activeUser")
-let activeEye = false;
+const activeUserButton = document.querySelector("#activeUser");
 
-// const eyePasswordIcon = `<span class="eyepassword">
-//                             <iconify-icon icon="mdi:eye-off-outline" width="25" height="25" id="eyeIcon"></iconify-icon>
-//                         </span>`
-
-// const eyePasswordIconShow = `<span class="eyepassword">
-//                                 <iconify-icon icon="fa-regular:eye" width="25" height="25" id="eyeIcon"></iconify-icon>
-//                             </span>`
-              
 const passInput = document.querySelector("#inputChgPassword");
 const divInput = document.querySelector("#labelInputPassword");
+const passLabels = document.querySelector(".password-labels");
+
+const rowShowPass = `<div class="container" id="labelsShowPassword">
+                        <input class="form-check-input" type="checkbox" id="showPassword" onclick="showpassword()">
+                        <label class="form-check-label" for="defaultCheck1">
+                            Mostrar Senha
+                        </label>
+                    </div>`
+
+
+function ShPass() {
+    if (document.querySelector("#showPassword").checked){
+        passInput.type = "text";
+    } else {
+        passInput.type ="password";
+    }
+}
+
+function addUser() {
+    document.querySelector("#configModalLabel").innerHTML = "Cadastrar Usuario";
+    const modal = document.getElementById("submitModal");
+    modal.querySelector("#user_input").removeAttribute("disabled","");
+    modal.setAttribute("onsubmit","confirmModal(event,1)");
+    passInput.placeholder = "Inserir Senha";
+    
+}
+
+function confirmModal(event,modalCommand) {
+    event.preventDefault();
+    console.log(modalCommand);
+    const modal = document.getElementById("submitModal");
+    modal.reset();
+}
+
+function chgUsersCfg (id,user) {
+    const modal = document.getElementById("configModal");
+    user = modal.querySelector("#user_input");
+    const nivel = modal.querySelector("#nivelUser");
+    const activeUser = modal.querySelector("activeUser");
+}
 
 chPasswordButton.addEventListener("click", () => {
+
     if (chPasswordButton.checked){
         passInput.removeAttribute("Disabled");
         divInput.setAttribute("style","background-color: #fff;");
         passInput.setAttribute("style","background-color: #fff;");
+
     } else {
         passInput.value = "";
         passInput.setAttribute("Disabled","");
         divInput.removeAttribute("style");
         passInput.removeAttribute("style");
-        // activeEye = false;
-        // try {
-        //     const eyePassword = document.querySelector(".eyepassword");
-        //     divInput.removeChild(eyePassword);
-        // } catch {}
+        try {
+            passLabels.removeChild(document.querySelector("#labelsShowPassword"))
+        } catch {}
+        charInput = false;
     }
-    // passInput.addEventListener("input", () => {
-    //     var input = passInput.value
-    //     if ((input.length == 1) && (activeEye == false)){
-    //         activeEye = true;
-    //         divInput.insertAdjacentHTML("beforeend",eyePasswordIcon);
+    
+});
 
-    //     }
-    //     if ( (activeEye == true) && (input.length == 0) ){
-    //         activeEye = false;
-    //         const eyePassword = document.querySelector(".eyepassword");
-    //         divInput.removeChild(eyePassword);
-    //     }
+passInput.addEventListener("input", () =>{
+    var chars = 0;
+    chars = passInput.value;
+    if ((chars.length > 0) && (charInput == false)) {
+        charInput = true;
+        passLabels.insertAdjacentHTML("beforeend",rowShowPass);
 
-    // if (activeEye = true){
-    //     const eyeIcon = document.querySelector(".eyepassword");
-    //     eyeIcon.addEventListener("click", () => {
-    //         if (passInput.type == "password") {
-    //             passInput.type = "text";
-    //         } else {
-    //             // passInput.type = "password";
-    //             console.log("Algo");
-    //         }
-    //         // eyeIcon.removeChild(document.querySelector("#eyeIcon"));
-    //         // eyeIcon.insertAdjacentHTML("beforeend", eyePasswordIconShow);
-    //     });
-    // }
-    // });
+
+    } else if (chars.length == 0){
+        passLabels.removeChild(document.querySelector("#labelsShowPassword"));
+        charInput = false;
+    }
 });
 
 
-// activeUserButton.addEventListener("click", () => {
-//     if (activeUserButton.checked) {
-//         activeUserButton.value = "true";
-//     } else {
-//         activeUserButton.value = "false";
-//     }
-// });
 
-const btnAddUser = document.querySelector("#btnAddUser");
-btnAddUser.addEventListener("click", () => {
-    const modal = document.getElementById("configModal");
-    modal.querySelector("#configModalLabel").innerHTML = "Cadastrar Usuario";
-    modal.querySelector("#user_input").removeAttribute("disabled","");
-    const inputPass = document.querySelector("#changePassword");
-    inputPass.addEventListener("click","");
-
-});
+window.showpassword = ShPass;
+window.confirmModal = confirmModal;
+window.addUser = addUser;
