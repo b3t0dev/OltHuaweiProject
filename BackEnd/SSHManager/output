@@ -41,3 +41,35 @@ outNotFound = [
   'Saida do Comando [1]: \r\n',
   'Saida do Comando [1]: \r\nMA5800-X17(config)#'
 ]
+
+
+Saida_do_comando2: [
+  '   \r\n' +
+    '   Number              : 1\r\n' +
+    '   F/S/P               : 0/17/0\r\n' +
+    '   Ont SN              : HWTC20F4215F\r\n' +
+    '   Password            : 0x57483034333430313334(WH04340134)\r\n' +
+    '   Loid                : SDWH04340134\r\n' +
+    '   Checkcode           : \r\n' +
+    '   VendorID            : HWTC\r\n' +
+    '   Ont Version         : 6A5.A\r\n' +
+    '   Ont SoftwareVersion : V3R015C10S106\r\n' +
+    '   Ont EquipmentID     : 310M\r\n' +
+    '   Ont Customized Info : -\r\n' +
+    '   Ont autofind time   : 2023-12-24 03:50:31-03:00\r\n' +
+    '   \r\n' +
+    '   Number              : 2\r\n' +
+    '   F/S/P               : 0/18/0\r\n' +
+    '   Ont SN              : HWTC2070A868\r\n' +
+    '   Password            : 0x61373339333337373769(a73933777i)\r\n' +
+    '   Loid                : \r\n' +
+    '   Checkcode           : \r\n' +
+    '   VendorID            : HWTC\r\n' +
+    '   Ont Version         : 6A5.A\r\n' +
+    '   Ont SoftwareVersion : V3R017C00S100\r\n' +
+    '   Ont EquipmentID     : HG8310M\r\n' +
+    '   Ont Customized Info : COMMON\r\n' +
+    '   Ont autofind time   : 2023-12-27 02:21:58-03:00\r\n' +
+    '   ',
+  '   The number of GPON autofind ONT is 2'
+]
