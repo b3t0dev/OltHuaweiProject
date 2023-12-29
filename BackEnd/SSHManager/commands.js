@@ -1,9 +1,24 @@
-import classe from "./Manager.js";
+import { executeCommands } from './Manager.js';
 
-const oltA = classe;
+const comandos = ['display sysuptime'];
+const comandos2 = ['display ont autofind all'];
+const comandos3 = ['display board desc 0/18'];
+const comandos4 = ['display board desc 0/19'];
+const comandos5 = ['display version'];
 
-const comandos = ['display sysuptime', 'display ont autofind all','display ont info summary 0/17'];
-oltA.connect();
+async function main(comand) {
+    const teste = await executeCommands(comand);
+    console.log(teste);
+    return teste;
+}
 
-const teste = await oltA.addToQueue(comandos);
-console.log(teste.length);
+(async () => {
+    console.time();
+    await Promise.all([
+        main(comandos),
+        main(comandos2),
+        main(comandos3),
+        main(comandos4)
+        ])
+    console.timeEnd();
+})()

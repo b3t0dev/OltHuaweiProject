@@ -150,13 +150,19 @@ class SSHManager {
 }
 
 // Configurações da OLT:
-const oltA_config = {
+const olt_config = {
   host: process.env.OLT_Address,
   port: process.env.OLT_Port,
   username: process.env.OLT_User,
   password: process.env.OLT_Password,
 };
 
-const oltA = new SSHManager( oltA_config );
+export async function executeCommands (comandos){
+  
+  const olt = new SSHManager ( olt_config );
+  olt.connect();
+  const result = await olt.addToQueue(comandos);
+  olt.disconnect();
+  return result;
 
-export default oltA;
+}
