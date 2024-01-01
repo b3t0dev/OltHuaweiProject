@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'iconify-icon';
 import Users from './usersConfig.js';
 
+var dbUrl = '/api';
 let charInput = false;
 const chPasswordButton = document.querySelector("#changePassword");
 const passInput = document.querySelector("#inputChgPassword");
@@ -55,8 +56,14 @@ passInput.addEventListener("input", () =>{
     }
 });
 
+async function checkUsers() {
+    const url = `${dbUrl}/Users`;
+    const usersData = await ( await fetch(url) ).json();
+    return usersData;
+}
 
-
+const teste = await checkUsers();
+console.log(teste);
 window.showpassword = ShPass;
 window.confirmModal = Users.confirmModal;
-window.addUser = Users.addUser;
+window.addUser = Users.addUserForm;
