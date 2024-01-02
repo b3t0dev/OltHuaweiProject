@@ -10,6 +10,7 @@ Content-Type: application/json
 {
   "name": "michael",
   "password": "notex021",
+  "lastLogin": "-",
   "privilege": 1
 }
 
