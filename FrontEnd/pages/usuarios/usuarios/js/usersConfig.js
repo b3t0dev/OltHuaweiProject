@@ -1,17 +1,23 @@
+var urlDB = '/api';
+
+function refreshPage (){
+    window.location.reload();
+}
+
 function get_FormUserConfig(){
     const modal = document.getElementById("configModal");
-    const user = modal.querySelector("#user_input").value;
-    const nivel = modal.querySelector("#nivelUser").value;
+    const name = modal.querySelector("#user_input").value;
+    const privilege = Number(modal.querySelector("#nivelUser").value);
     const password = modal.querySelector("#inputChgPassword").value;
-    let activeUser = modal.querySelector("#activeUser");
+    let active = modal.querySelector("#activeUser");
 
-    if (activeUser.checked){
-        activeUser = true;
+    if (active.checked){
+        active = true;
     } else {
-        activeUser = false;
+        active = false;
     }
     
-    const form_values = { user, nivel, password, activeUser };
+    const form_values = { name, password, active, privilege };
     return form_values
 }
 
@@ -25,61 +31,94 @@ function addUserForm() {
     
 }
 
-function chgUsersCfg (id,usuario) {
-    const modal = document.getElementById("configModal");
-    const user = modal.querySelector("#user_input");
-    const nivel = modal.querySelector("#nivelUser");
-    const activeUser = modal.querySelector("activeUser");
+async function addUsertodB (user_data) {
+    user_data['lastLogin'] = '-';
 
+    const configRequest = {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user_data),
+    }
+
+    const newUser = await( await fetch(`${urlDB}/Users`, configRequest) ).json();
+    return newUser;
 }
 
-function confirmModal(event,modalCommand) {
+async function chgUsersCfg (user_data) {
+    let user = user_data.split('-');
+    
+    const modal = document.getElementById("configModal");
+    const name = modal.querySelector("#user_input");
+    const privilege = modal.querySelector("#nivelUser");
+    const active = modal.querySelector("#activeUser");
+    
+    user = await ( await fetch(`${urlDB}/Users/${user[0]}`) ).json();
+
+    name.value = user.name;
+    privilege.value = user.privilege;
+    if (user.active){
+        active.setAttribute("checked","");
+    } else {
+        active.removeAttribute("checked");
+    }
+    
+}
+
+async function confirmModal(event,modalCommand) {
     event.preventDefault();
 
     if (modalCommand == 1) {
         const user_data = get_FormUserConfig();
-        addUser(user_data);
-        console.log(user_data);
+        const newUser = await addUsertodB(user_data);
+        addUser(newUser);
+
     }
     const modal = document.getElementById("submitModal");
     modal.reset();
+    refreshPage();
 }
 
 function addUser(user_data) {
-    let id = '-';
-    let ativo = '-';
+    let id = user_data.id;
+    let ativo = user_data.active;
     let login = '-';
-    let lastLogin = '-';
+    let lastLogin = user_data.lastLogin;
     let nivel = '';
     
-    if (user_data.activeUser) {
+    if (user_data.active) {
         ativo = "Sim";
     } else {
         ativo = "Não";
     }
 
-    if (user_data.nivel == 1) {
+    if (user_data.privilege == 1) {
         nivel = "Padrão";
     } else {
         nivel = "Administrador";
     }
 
     const rowFront = `
-        <tr>
+        <tr id="${user_data.id}-${user_data.name}">
             <th>${id}</th>
-                <td>${user_data.user}</td>
+                <td>${user_data.name}</td>
                 <td>${ativo}</td>
                 <td>${login}</td>
                 <td>${lastLogin}</td>
                 <td>${nivel}</td>
                 <td>
                     <span class="clickIcon">
-                        <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
+                        <a data-bs-toggle="modal" data-bs-target="#configModal" onclick="changeConfig('${id}-${user_data.name}')">
+                            <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon>
+                        </a>
                     </span>
                 </td>
                 <td>
                     <span class="clickIcon clickDelete">
-                        <iconify-icon icon="bx:trash" width="27" height="22"></iconify-icon>
+                        <a data-bs-toggle="modal" data-bs-target="#modalRemove" onclick="removeUser('${id}-${user_data.name}')">
+                            <iconify-icon icon="bx:trash" width="27" height="22"></iconify-icon>
+                        </a>
                     </span>
                 </td>
         </tr>`
@@ -88,4 +127,32 @@ function addUser(user_data) {
     table.insertAdjacentHTML("beforeend", rowFront);
 }
 
-export default { addUserForm, chgUsersCfg, confirmModal };
+function delUser(user_data){
+    const user = user_data.split('-');
+    console.log(user);
+    const modal_remove = document.getElementById('modalRemove');
+    modal_remove.querySelector('h5').innerHTML = `Remover o usuario: ${user[1]}`;
+    const buttonConfirm = document.getElementById('buttonDeleteConfirm');
+    buttonConfirm.setAttribute('onclick', `confirmRemove("${user_data}")`);
+
+}
+
+async function confirmDelUser(user_data){
+    const user = user_data.split('-');
+    const id = user[0];
+
+    const configRequest = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+    };
+
+    await fetch(`${urlDB}/Users/${id}`, configRequest);
+
+    const rowRemove = document.getElementById(user_data);
+    rowRemove.remove();
+    refreshPage();
+}
+
+export default { addUserForm, chgUsersCfg, confirmModal, addUser, delUser, confirmDelUser };

@@ -10,6 +10,7 @@ Content-Type: application/json
 {
   "name": "michael",
   "password": "notex021",
+  "active": true,
   "lastLogin": "-",
   "privilege": 1
 }
@@ -70,15 +71,16 @@ GET {{baseUrl}}/users/7
 
 ### Update a host
 
-PUT {{baseUrl}}/users/1
+PUT {{baseUrl}}/users/16
 Content-Type: application/json
 
 {
   "name": "beto",
   "password": "123",
+  "lastLogin": "01",
   "privilege": 0
 }
 
 ### Delete a host
 
-DELETE {{baseUrl}}/olts/12
+DELETE {{baseUrl}}/users/1

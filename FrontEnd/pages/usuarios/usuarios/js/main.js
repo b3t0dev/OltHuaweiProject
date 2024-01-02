@@ -59,11 +59,16 @@ passInput.addEventListener("input", () =>{
 async function checkUsers() {
     const url = `${dbUrl}/Users`;
     const usersData = await ( await fetch(url) ).json();
-    return usersData;
+
+    for (const user of usersData){
+        Users.addUser(user);
+    }
 }
 
-const teste = await checkUsers();
-console.log(teste);
+await checkUsers();
 window.showpassword = ShPass;
 window.confirmModal = Users.confirmModal;
 window.addUser = Users.addUserForm;
+window.removeUser = Users.delUser;
+window.confirmRemove = Users.confirmDelUser;
+window.changeConfig = Users.chgUsersCfg;
