@@ -159,7 +159,7 @@ router.post('/user', async (req, res) => {
     const user = await Users.readByUser(usuario);
   
     if (user) {
-      res.json("Acessou");
+      res.json(user);
     } else {
       res.json("Erro de Login")
     }

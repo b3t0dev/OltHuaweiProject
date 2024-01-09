@@ -75,10 +75,7 @@ PUT {{baseUrl}}/users/16
 Content-Type: application/json
 
 {
-  "name": "beto",
-  "password": "123",
-  "lastLogin": "01",
-  "privilege": 0
+  "lastLogin": "08/01/2024 10:00:00"
 }
 
 ### Delete a host

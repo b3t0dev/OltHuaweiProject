@@ -41,7 +41,9 @@ async function readByUser(dbuser){
   });
   const hash = usuario.password;
   const match = await bcrypt.compare(dbuser.password, hash);
-  return match;
+  if (match) {
+    return usuario.id;
+  }
 }
 
 async function update(user, id) {

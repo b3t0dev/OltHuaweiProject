@@ -28,9 +28,10 @@ async function login(){
     
     const data = { name, password };
     const url = `${dBServer}/user`
-    const login = await buscarnoBanco(url, data);
-    if (login){
-        logado();
+    const loginID = await buscarnoBanco(url, data);
+
+    if ((typeof loginID) == (typeof Number())){
+        logado(loginID);
     } else {
         erroLogin();
     }
@@ -48,15 +49,30 @@ async function buscarnoBanco(url, dataLogin){
       };
 
     const login = await (await fetch(url, configRequest)).json();
-    if (login == "Acessou") {
-        return true;
+    if (login) {
+        return login;
     } else {
         return false;
     }
 
 }
 
-function logado(){
+async function logado(idUser){
+    const date = new Date();
+    const loginDate = date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    
+    const dataLogin = { lastLogin:loginDate }
+    const configRequest = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataLogin),
+      };
+
+    const logged = await (await fetch(`${dBServer}/users/${idUser}`, configRequest)).json();
+    // console.log(logged);
+
     window.location.href= "./pages/Tela1/index.html"
 }
 
