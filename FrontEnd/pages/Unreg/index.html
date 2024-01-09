@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Usuarios</title>
+    <title>Buscar ONU</title>
   </head>
   <body>
     <div id="main">
@@ -25,10 +25,10 @@
                     </a>
                     <ul class="dropdown-menu">
                       <li>
-                        <a class="btn btn-light d-flex justify-content-center" href="../../Tela1/index.html" >Principal</a>
+                        <a class="btn btn-light d-flex justify-content-center" href="../Tela1/index.html" >Principal</a>
                       </li>
                       <li>
-                        <a class="btn btn-light d-flex justify-content-center" href="../../Unreg/index.html" >Buscar ONUs</a>
+                        <a class="btn btn-light d-flex justify-content-center" href="../usuarios/usuarios/index.html" >Usuarios</a>
                       </li>
                       <li>
                         <hr class="dropdown-divider"></li>
@@ -41,11 +41,11 @@
               </div>
             </div>
           </nav>
-        <div class="container d-flex ">
-          <h4 style="color: #5c636a;" class="container w-100 justify-content-center">Gerencia de Usuarios</h4>  
-          <a href="#" data-bs-toggle="modal" data-bs-target="#configModal">
-            <button type="button" class="btn btn-secondary" id="btnAddUser" onclick="addUser()">+</button>
-          </a>
+        <div class="container d-flex">
+          <h4 style="color: #5c636a;" class="container w-100 justify-content-center">Não Provisionadas</h4> 
+          <span class="align-middle">
+            <iconify-icon icon="fa-solid:sync-alt" style="color: #5c636a;" width="21" height="21" class="clickIcon"></iconify-icon>
+          </span>
         </div>
       </div>
 
@@ -54,92 +54,58 @@
           <thead>
             <tr>
               <th scope="col">Id</th>
-              <th scope="col">Usuario</th>
-              <th scope="col">Ativo</th>
-              <th scope="col">Logado</th>
-              <th scope="col">Ultimo Login</th>
-              <th scope="col">Nivel</th>
-              <th scope="col">Config</th>
-              <th scope="col">Remove</th>
+              <th scope="col">Olt</th>
+              <th scope="col">Serial</th>
+              <th scope="col">Loid</th>
+              <th scope="col">Version</th>
+              <th scope="col">Model</th>
+              <th scope="col">Detectada</th>
+              <th scope="col">Comandos</th>
             </tr>
           </thead>
           <tbody>
-            <!-- <tr>
+            <tr>
               <th>1</th>
-              <td>Michael</td>
-              <td>Sim</td>
-              <td>Sim</td>
-              <td>20/12/2023 17:50:50</td>
-              <td>Administrador</td>
+              <td>0/17/0</td>
+              <td>HWTC20F4215F</td>
+              <td>SDWH04340134</td>
+              <td>6A5.A</td>
+              <td>310M</td>
+              <td>08/01/2024 18:30:54</td>
               <td>
                 <span class="clickIcon">
                   <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
-                </span>
-              </td>
-              <td>
-                <span class="clickIcon clickDelete">
-                  <iconify-icon icon="bx:trash" width="27" height="22"></iconify-icon>
                 </span>
               </td>
             </tr>
             <tr>
               <th>2</th>
-              <td>Beto</td>
-              <td>Não</td>
-              <td>Não</td>
-              <td>20/12/2023 10:32:50</td>
-              <td>Administrador</td>
+              <td>0/18/0</td>
+              <td>HWTC2070A868</td>
+              <td>-</td>
+              <td>6A5.A</td>
+              <td>HG8310M</td>
+              <td>09/01/2024 15:32:50</td>
               <td>
                 <span class="clickIcon">
                   <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
-                </span>
-              </td>
-              <td>
-                <span>
-                  <iconify-icon icon="bx:trash" width="27" height="22" class="clickIcon clickDelete"></iconify-icon>
                 </span>
               </td>
             </tr>
             <tr>
               <th>3</th>
-              <td>Tony</td>
-              <td>Sim</td>
-              <td>Não</td>
-              <td>15/10/2023 22:00:50</td>
-              <td>Administrador</td>
+              <td>0/16/0</td>
+              <td>HWTC2070A867</td>
+              <td>-</td>
+              <td>6A5.A</td>
+              <td>HG8310M</td>
+              <td>05/01/2024 19:01:26</td>
               <td>
                 <span class="clickIcon">
                   <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
                 </span>
               </td>
-              <td>                
-                <span>
-                  <iconify-icon icon="bx:trash" width="27" height="22" class="clickIcon clickDelete"></iconify-icon>
-                </span>
-              </td>
             </tr>
-            <tr>
-              <th>4</th>
-              <td>Ismael</td>
-              <td>Sim</td>
-              <td>Não</td>
-              <td>19/10/2023 02:54:10</td>
-              <td>Padrão</td>
-              <td>
-                <span class="clickIcon">
-                  <a data-bs-toggle="modal" data-bs-target="#configModal">
-                    <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="22"></iconify-icon> 
-                  </a>
-                </span>
-              </td>
-              <td>
-                <span class="clickIcon clickDelete">
-                  <a data-bs-toggle="modal" data-bs-target="#modalRemove">
-                    <iconify-icon icon="bx:trash" width="27" height="22"></iconify-icon>
-                  </a>
-                </span>
-              </td>
-            </tr> -->
           </tbody>
 
         </table>
