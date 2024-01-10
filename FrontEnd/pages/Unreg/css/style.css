@@ -27,6 +27,7 @@ body{
 #iconHead{
   display: flex;
   justify-content: center;
+  align-items: center;
 } 
 
 #bodyList{
@@ -63,6 +64,9 @@ h4{
 }
 
 .clickIcon{ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0.5;
 }
 
