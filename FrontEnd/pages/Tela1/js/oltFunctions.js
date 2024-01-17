@@ -27,10 +27,11 @@ function add_slots(olt, slots, idtrRow){
             <tr>
               <th>Status</th>
               <th>Slot/Pons</th>
+              <th>Board Name</th>
               <th>ONU Discovery</th>
               <th>ONU's Provisioned</th>
               <th>ONU's Online</th>
-              <th>Options</th>
+              <th>Syncronize</th>
             </tr>
           </thead>
     <tbody>\n`
@@ -40,17 +41,19 @@ function add_slots(olt, slots, idtrRow){
     tableSecondaryTbody += `<tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
             <td>${slot.status}</td>
             <td>${slot.slot}</td>
+            <td>-</td>
             <td>${slot.OnuDiscovery}</td>
             <td>${slot.OnuProvisioned}</td>
             <td>${slot.OnuOnline}</td>
             <td>
-              <span id="configIcon" class="clickIcon">
+              <span id="configIcon" class="clickIcon" onclick="syncPon('${slot.slot}')">
                 <a>
-                  <iconify-icon icon="vscode-icons:file-type-light-config" width="15" height="15"></iconify-icon>
+                  <iconify-icon icon="fa-solid:sync-alt" width="15" height="15" class="" ></iconify-icon>
                 </a>
-            </span>
-      </td>`
+              </span>
+            </td>`
   }
+
   tableSecondaryHead += `${tableSecondaryTbody}\n
                         </tbody>\n
                       </table>\n
