@@ -1,6 +1,7 @@
 import oltFunction from './oltFunctions.js'
 import Status from './states.js'
 import API from './apiFunctions.js'
+import Commands from './oltCommands.js'
 
 async function main(ip){
     const OLTS = await checkOLTsDB(ip)
@@ -17,6 +18,7 @@ async function main(ip){
     window.deleteOlt = oltFunction.remove_olt;
     window.configsOLT = oltFunction.configsOLT;
     window.confirmRemove = oltFunction.confirmRemove;
+    window.syncPon = Commands.checkPons;
 }
 
 async function checkOLTsDB(ipDB){

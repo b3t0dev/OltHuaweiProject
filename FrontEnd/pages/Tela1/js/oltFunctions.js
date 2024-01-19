@@ -46,9 +46,9 @@ function add_slots(olt, slots, idtrRow){
             <td>${slot.OnuProvisioned}</td>
             <td>${slot.OnuOnline}</td>
             <td>
-              <span id="configIcon" class="clickIcon" onclick="syncPon('${slot.slot}')">
+              <span class="clickIcon" onclick="syncPon('${olt.id}','${slot.slot}')">
                 <a>
-                  <iconify-icon icon="fa-solid:sync-alt" width="15" height="15" class="" ></iconify-icon>
+                  <iconify-icon icon="fa-solid:sync-alt" width="15" height="15" id="sync-${olt.id}-${slot.slot}" class="" ></iconify-icon>
                 </a>
               </span>
             </td>`

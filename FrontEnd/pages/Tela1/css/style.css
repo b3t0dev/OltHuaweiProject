@@ -79,3 +79,7 @@ h4{
     -o-animation: rotating 1s linear infinite;
     animation: rotating 1s linear infinite;
   }
+
+  .disabled {
+    pointer-events: none;
+  }
