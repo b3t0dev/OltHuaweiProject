@@ -53,6 +53,8 @@ async function chgUsersCfg (user_data) {
     const name = modal.querySelector("#user_input");
     const privilege = modal.querySelector("#nivelUser");
     const active = modal.querySelector("#activeUser");
+    const submitModal = document.getElementById("submitModal");
+    submitModal.setAttribute("onsubmit",`confirmModal(event,0,${user[0]})`);
     
     user = await ( await fetch(`${urlDB}/Users/${user[0]}`) ).json();
 
@@ -66,18 +68,26 @@ async function chgUsersCfg (user_data) {
     
 }
 
-async function confirmModal(event,modalCommand) {
+async function confirmModal(event,modalCommand,id = '') {
     event.preventDefault();
+    const modal = document.getElementById("submitModal");
 
+    const user_data = get_FormUserConfig();
     if (modalCommand == 1) {
-        const user_data = get_FormUserConfig();
         const newUser = await addUsertodB(user_data);
         addUser(newUser);
 
+    } else {
+
+        if (user_data.password == '') {
+            delete user_data['password'];
+        }
+        console.log(user_data,id);
+        const teste = await confirmChgUser(user_data, id);
+        console.log(teste);
+        modal.reset();
+        refreshPage();
     }
-    const modal = document.getElementById("submitModal");
-    modal.reset();
-    refreshPage();
 }
 
 function addUser(user_data) {
@@ -153,6 +163,20 @@ async function confirmDelUser(user_data){
     const rowRemove = document.getElementById(user_data);
     rowRemove.remove();
     refreshPage();
+}
+
+async function confirmChgUser(user_data, id){
+    
+    const configRequest = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user_data),
+      };
+
+    const logged = await (await fetch(`${urlDB}/users/${id}`, configRequest)).json();
+    return logged;
 }
 
 export default { addUserForm, chgUsersCfg, confirmModal, addUser, delUser, confirmDelUser };

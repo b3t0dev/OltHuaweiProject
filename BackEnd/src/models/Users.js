@@ -41,12 +41,17 @@ async function readByUser(dbuser){
   });
   const hash = usuario.password;
   const match = await bcrypt.compare(dbuser.password, hash);
-  if (match) {
+  if ((match) && (usuario.active)) {
     return usuario.id;
   }
 }
 
 async function update(user, id) {
+
+  if (user.password) {
+    const hash = await bcrypt.hash(user.password, saltRounds);
+    user.password = hash;
+  }
   const newUser = await prisma.user.update({
     data: user,
     where: {

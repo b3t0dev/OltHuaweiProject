@@ -22,8 +22,8 @@ POST {{baseUrl}}/user
 Content-Type: application/json
 
 {
-  "name": "michael",
-  "password": "notex021"
+  "name": "beto",
+  "password": "123"
 }
 
 ### Create Olt
