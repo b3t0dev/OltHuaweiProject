@@ -19,6 +19,7 @@ async function main(ip){
     window.configsOLT = oltFunction.configsOLT;
     window.confirmRemove = oltFunction.confirmRemove;
     window.syncPon = Commands.checkPons;
+    window.resyncOlt = Commands.checkOlt;
 }
 
 async function checkOLTsDB(ipDB){

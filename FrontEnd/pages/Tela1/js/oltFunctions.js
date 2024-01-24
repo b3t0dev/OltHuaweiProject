@@ -66,6 +66,7 @@ function add_slots(olt, slots, idtrRow){
 
 async function add_olt(ipDB, olt){
   
+
   const name = olt.OltName;
   const ip = olt.ipAddress;
   const armario = olt.Armario;
@@ -99,22 +100,32 @@ async function add_olt(ipDB, olt){
                                       <td>${armario}</td>
                                       <td>${powerdb}</td>
                                       <td>${maxclients}</td>
-                                      <td>${ip}</td>
-                                      <td>
-                                          <span id="${statusClass}-${ip}" class="clickIcon" onclick="configsOLT('${ipDB}','${olt.id}')">
-                                              <a class="dropdown-item" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#configModal">
-                                                  <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="29"></iconify-icon>
-                                              </a>
-                                          </span>
-                                      </td>
-                                      <td>
-                                          <span class="clickIcon clickDelete" onclick="deleteOlt('${statusClass}-${name}-${ip}')">
-                                              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalRemove">
-                                              <iconify-icon icon="bx:trash" width="27" height="29"></iconify-icon>
-                                          </span>
-                  </td>`
+                                      <td>${ip}</td>`
+            
+  let btSync = `<td>
+            <span class="clickIcon" onclick="resyncOlt('${statusClass}-${name}','${ip}')">
+              <a>
+                <iconify-icon icon="fa-solid:sync-alt" width="25" height="24" class="" ></iconify-icon>
+              </a>
+           </span>
+          </td>`
+
+  let btCfgRemove = `<td>
+                        <span id="${statusClass}-${ip}" class="clickIcon" onclick="configsOLT('${ipDB}','${olt.id}')">
+                          <a class="dropdown-item" href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#configModal">
+                            <iconify-icon icon="vscode-icons:file-type-light-config" width="27" height="29"></iconify-icon>
+                          </a>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="clickIcon clickDelete" onclick="deleteOlt('${statusClass}-${name}-${ip}')">
+                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modalRemove">
+                            <iconify-icon icon="bx:trash" width="27" height="29"></iconify-icon>
+                        </span>
+                      </td>`     
   
-  rowOLT += rowSlots;
+  let endRowOlt = `</tr>`     
+  rowOLT += btSync += btCfgRemove += endRowOlt += rowSlots;
   const tabela = document.querySelector('table tbody');
   tabela.insertAdjacentHTML('beforeend', rowOLT);
 
@@ -174,6 +185,11 @@ async function configsOLT(ipDB, oltid){
   document.getElementById('formConfigModal').setAttribute("onsubmit","changeConfigsOLT(event)"); // F. Complete
   form = document.getElementById('formConfigModal');
   console.log(form);
+
+}
+
+function addAdminOptions() {
+
 
 }
 

@@ -7,4 +7,9 @@ async function checkPons(oltid, slot) {
     console.log(syncBt);
 }
 
-export default { checkPons };
+async function checkOlt(oltdata, ip){
+    console.log(oltdata);
+
+}
+
+export default { checkPons, checkOlt };
