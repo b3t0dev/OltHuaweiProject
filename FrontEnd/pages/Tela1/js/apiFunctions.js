@@ -17,22 +17,25 @@ async function addOltConfigForm(event){
     } else {
         status = false;
     }
+    const lastUpdate = ''
 
-    const olt = { status, OltName, Armario, PowerdB, maxClients, ipAddress };
-
-    oltFunction.add_olt(urlDB, olt);
-    const configsform = document.getElementById('formConfigModal');
-    configsform.reset();
-
+    const olt = { status, OltName, Armario, PowerdB, maxClients, ipAddress, lastUpdate };
+    
     const configRequest = {
         method: 'post',
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify(olt),
     };
     
-    const newOlt = await fetch(`${urlDB}/olts`, configRequest);
+    const newOlt = await (await fetch(`${urlDB}/olts`, configRequest)).json();
+    
+    oltFunction.add_olt(urlDB, newOlt);
+    const configsform = document.getElementById('formConfigModal');
+    configsform.reset();
+    
+    console.log(newOlt);
 
 }
 

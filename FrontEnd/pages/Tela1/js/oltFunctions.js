@@ -100,7 +100,8 @@ async function add_olt(ipDB, olt){
                                       <td>${armario}</td>
                                       <td>${powerdb}</td>
                                       <td>${maxclients}</td>
-                                      <td>${ip}</td>`
+                                      <td>${ip}</td>
+                                      <td>-</td>`
             
   let btSync = `<td>
             <span class="clickIcon" onclick="resyncOlt('${statusClass}-${name}','${ip}')">
@@ -161,12 +162,11 @@ async function confirmRemove(data){
   const olt = document.getElementById(data)
   olt.remove();
   await fetch(`/api/olts/${Olt.id}`, configRequest);
-
-  if (Slots.length != 0) {
+  
+  try {
     const oltslots = document.getElementById(data)
     oltslots.remove();
-  }
-  
+  } catch {}
 
 }
 

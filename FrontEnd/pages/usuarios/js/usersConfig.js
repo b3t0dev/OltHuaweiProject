@@ -33,6 +33,7 @@ function addUserForm() {
 
 async function addUsertodB (user_data) {
     user_data['lastLogin'] = '-';
+    user_data['AccessToken'] = '';
 
     const configRequest = {
         method: 'post',

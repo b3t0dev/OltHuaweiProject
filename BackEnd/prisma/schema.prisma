@@ -15,6 +15,7 @@ model User {
   id    Int     @id @default(autoincrement())
   name  String  @unique
   active Boolean @default(false)
+  AccessToken String
   lastLogin String
   password String
   privilege Int
@@ -28,6 +29,7 @@ model oltFound {
   PowerdB     String
   maxClients  String
   ipAddress   String  @unique
+  lastUpdate  String
   slots       slotsOLT[]
 }
 
@@ -35,9 +37,11 @@ model slotsOLT {
   id              Int     @id @default(autoincrement())
   status          Int
   slot            String
+  BoardName       String
   OnuDiscovery    Int
   OnuProvisioned  Int
   OnuOnline       Int
+  lastUpdate      String
   olt             oltFound  @relation(fields: [oltId], references: [id])
   oltId           Int
   

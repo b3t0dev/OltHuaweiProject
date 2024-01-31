@@ -8,10 +8,11 @@ POST {{baseUrl}}/users
 Content-Type: application/json
 
 {
-  "name": "michael",
-  "password": "notex021",
+  "name": "beto",
+  "password": "123",
   "active": true,
   "lastLogin": "-",
+  "AccessToken": "",
   "privilege": 1
 }
 
@@ -23,7 +24,7 @@ Content-Type: application/json
 
 {
   "name": "beto",
-  "password": "123"
+  "password": ""
 }
 
 ### Create Olt
@@ -34,11 +35,12 @@ Content-Type: application/json
 
 {
   "status": false,
-  "OltName": "OltDC",
-  "Armario": "POP MatrizD5",
+  "OltName": "OltC",
+  "Armario": "POP MatrizB",
   "PowerdB": "",
-  "maxClients": "",
-  "ipAddress": "50.50.50.50"
+  "maxClients": "256",
+  "ipAddress": "127.0.0.3",
+  "lastUpdate": ""
 }
 
 
@@ -49,11 +51,13 @@ Content-Type: application/json
 
 {
   "status": 1,
-  "slot": "0/3",
-  "OnuDiscovery": 80,
-  "OnuProvisioned": 40,
-  "OnuOnline": 24,
-  "oltId": 3
+  "slot": "0/18",
+  "BoardName": "",
+  "OnuDiscovery": 0,
+  "OnuProvisioned": 10,
+  "OnuOnline": 10,
+  "lastUpdate": "",
+  "oltId": 2
 }
 ### Show All Slots
 
