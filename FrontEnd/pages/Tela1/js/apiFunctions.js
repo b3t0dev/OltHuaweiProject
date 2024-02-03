@@ -1,3 +1,4 @@
+import globalFunctions from '../../../js/globalFunctions.js';
 import oltFunction from './oltFunctions.js';
 import states from './states.js';
 
@@ -16,7 +17,6 @@ function getFormOltConfig(){
     } else {
         status = false;
     }
-    const lastUpdate = ''
 
     const oltForm = { status, OltName, Armario, PowerdB, maxClients, ipAddress };
     
@@ -28,7 +28,7 @@ function getFormOltConfig(){
 
 async function add_Olt_todB(olt_data){
 
-    olt_data['lastUpdate'] = '';
+    olt_data['lastUpdate'] = '-';
 
     const configRequest = {
         method: 'post',
@@ -43,20 +43,10 @@ async function add_Olt_todB(olt_data){
         
 }
 
-async function changeOltConfig(event,olt_id){
+function changeOltConfig(event,olt_id){
     event.preventDefault();
     const olt_data = getFormOltConfig();
-    
-    const configRequest = {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(olt_data),
-    };
-
-    const oltUpdated = await (await fetch(`${urlDB}/olts/${olt_id}`, configRequest)).json();
-    window.location.reload();
+    globalFunctions.updateOltondB(olt_data, olt_id);
 }
 
 async function addNewOlt(event){
@@ -68,4 +58,5 @@ async function addNewOlt(event){
 
 }
 
-export default { getFormOltConfig, changeOltConfig, addNewOlt };
+
+export default { getFormOltConfig, changeOltConfig, addNewOlt }

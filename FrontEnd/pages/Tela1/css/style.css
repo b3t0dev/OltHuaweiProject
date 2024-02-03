@@ -44,9 +44,6 @@ h4{
 }
 
 .clickIcon{ 
-    display: flex;
-    align-items: center;
-    justify-content: center;
     opacity: 0.5;
 }
 
@@ -58,6 +55,11 @@ h4{
     color: red;
 }
 
+.disabledIcon{
+    opacity: 1;
+    color: rgb(92, 17, 7);
+    pointer-events: none;
+}
 
 @keyframes rotating {
     from {

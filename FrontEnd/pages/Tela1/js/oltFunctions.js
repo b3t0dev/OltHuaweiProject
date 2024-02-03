@@ -46,9 +46,9 @@ function add_slots(olt, slots, idtrRow){
             <td>${slot.OnuProvisioned}</td>
             <td>${slot.OnuOnline}</td>
             <td>
-              <span class="clickIcon" onclick="syncPon('${olt.id}','${slot.slot}')">
+              <span>
                 <a>
-                  <iconify-icon icon="fa-solid:sync-alt" width="15" height="15" id="sync-${olt.id}-${slot.slot}" class="" ></iconify-icon>
+                  <iconify-icon icon="fa-solid:sync-alt" width="15" height="15" id="sync-${olt.id}-${slot.slot}" class="clickIcon" onclick="syncPon('${olt.id}','${slot.slot}')"></iconify-icon>
                 </a>
               </span>
             </td>`
@@ -72,6 +72,7 @@ async function add_olt(ipDB, olt){
   const armario = olt.Armario;
   const powerdb = olt.PowerdB;
   const maxclients = olt.maxClients;
+  const lastUpdate = olt.lastUpdate;
   let config = ''
   const id = olt.OltName;
   let statusClass = ''
@@ -101,12 +102,12 @@ async function add_olt(ipDB, olt){
                                       <td>${powerdb}</td>
                                       <td>${maxclients}</td>
                                       <td>${ip}</td>
-                                      <td>-</td>`
+                                      <td>${lastUpdate}</td>`
             
   let btSync = `<td>
-            <span class="clickIcon" onclick="resyncOlt('${statusClass}-${name}','${ip}')">
+            <span>
               <a>
-                <iconify-icon icon="fa-solid:sync-alt" width="25" height="24" class="" ></iconify-icon>
+                <iconify-icon icon="fa-solid:sync-alt" width="25" height="24" id=sync-${olt.id}-${ip} class="clickIcon" onclick="resyncOlt('${olt.id}','${ip}')"></iconify-icon>
               </a>
            </span>
           </td>`

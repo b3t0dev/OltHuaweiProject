@@ -2,6 +2,7 @@ import '../css/style.css'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'iconify-icon'
+import globalFunctions from './globalFunctions';
 
 const dBServer = '/api'
 
@@ -58,9 +59,9 @@ async function buscarnoBanco(url, dataLogin){
 }
 
 async function logado(idUser){
-    const date = new Date();
-    const loginDate = date.toLocaleDateString() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-    
+
+    const loginDate = globalFunctions.getDate();
+
     const dataLogin = { lastLogin:loginDate }
     const configRequest = {
         method: 'PUT',
@@ -80,6 +81,7 @@ function erroLogin(){
     const tagError = document.getElementById('loginError');
     tagError.innerHTML = "Acesso Negado";
 }
+
 function clearError(){
     document.getElementById('loginError').innerText = '';
 
