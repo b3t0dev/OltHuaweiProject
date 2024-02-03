@@ -13,8 +13,8 @@ async function main(ip){
 
     }
     
-    window.addConfigsOLT = API.addOltConfigForm;
-    window.changeConfigsOLT = API.changeOltConfigForm;
+    window.addConfigsOLT = API.addNewOlt;
+    window.changeConfigsOLT = API.changeOltConfig;
     window.deleteOlt = oltFunction.remove_olt;
     window.configsOLT = oltFunction.configsOLT;
     window.confirmRemove = oltFunction.confirmRemove;

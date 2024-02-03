@@ -35,9 +35,9 @@ async function readName(OltName) {
   return olt;
 }
 
-async function update(host, id) {
-  const newHost = await prisma.User.update({
-    data: host,
+async function update(olt, id) {
+  const newHost = await prisma.oltFound.update({
+    data: olt,
     where: {
       id,
     },

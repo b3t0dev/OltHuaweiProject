@@ -113,6 +113,21 @@ router.get('/olts', async (req, res) => {
 
 })
 
+// Update Olt ByID (x)
+router.put('/olts/:id', async (req, res) => {
+  const id = Number(req.params.id);
+
+  const olt = req.body;
+
+  if (id && olt) {
+    const newOlt = await Olt.update(olt, id);
+
+    res.json(newOlt);
+  } else {
+    throw new HTTPError('Invalid data to update olt', 400);
+  }
+});
+
 // Get Olt ByID (x)
 router.get('/olts/:id', async (req, res) => {
   const id = Number(req.params.id);

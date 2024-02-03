@@ -3,8 +3,7 @@ import states from './states.js';
 
 const urlDB = '/api'
 
-async function addOltConfigForm(event){
-    event.preventDefault();
+function getFormOltConfig(){
 
     const OltName = document.getElementById('modal-olt-name').value;
     const ipAddress = document.getElementById('modal-olt-ip').value;
@@ -19,31 +18,54 @@ async function addOltConfigForm(event){
     }
     const lastUpdate = ''
 
-    const olt = { status, OltName, Armario, PowerdB, maxClients, ipAddress, lastUpdate };
+    const oltForm = { status, OltName, Armario, PowerdB, maxClients, ipAddress };
     
+    const configsform = document.getElementById('formConfigModal');
+    configsform.reset();
+    
+    return oltForm;
+}
+
+async function add_Olt_todB(olt_data){
+
+    olt_data['lastUpdate'] = '';
+
     const configRequest = {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(olt),
+        body: JSON.stringify(olt_data),
     };
     
     const newOlt = await (await fetch(`${urlDB}/olts`, configRequest)).json();
-    
-    oltFunction.add_olt(urlDB, newOlt);
-    const configsform = document.getElementById('formConfigModal');
-    configsform.reset();
-    
-    console.log(newOlt);
-
+    return newOlt;
+        
 }
 
-function changeOltConfigForm(event){
+async function changeOltConfig(event,olt_id){
     event.preventDefault();
-    const configsform = document.getElementById('formConfigModal');
-    configsform.reset();
-    configsform.setAttribute("onsubmit","addConfigsOLT(event)");
+    const olt_data = getFormOltConfig();
+    
+    const configRequest = {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(olt_data),
+    };
+
+    const oltUpdated = await (await fetch(`${urlDB}/olts/${olt_id}`, configRequest)).json();
+    window.location.reload();
 }
 
-export default { addOltConfigForm, changeOltConfigForm };
+async function addNewOlt(event){
+
+    event.preventDefault();
+    const olt_data = getFormOltConfig();
+    const newOlt = await add_Olt_todB(olt_data);
+    oltFunction.add_olt(urlDB, newOlt);
+
+}
+
+export default { getFormOltConfig, changeOltConfig, addNewOlt };

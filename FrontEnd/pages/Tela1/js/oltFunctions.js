@@ -173,19 +173,17 @@ async function confirmRemove(data){
 async function configsOLT(ipDB, oltid){
   const url = ipDB + "/OLTS/" + oltid
 
-  const olt = await fetch(url)
-  const config = await olt.json();
-  document.getElementById('modal-olt-name').value = config.OltName;
-  document.getElementById('modal-olt-ip').value = config.ipAddress;
-  document.getElementById('modal-olt-armario').value = config.Armario;
-  document.getElementById('modal-olt-powerdb').value = config.PowerdB;
-  document.getElementById('selected-maxclients-value').value = config.maxClients;
-  let form = document.getElementById('formConfigModal');
-  console.log(form);
-  document.getElementById('formConfigModal').setAttribute("onsubmit","changeConfigsOLT(event)"); // F. Complete
-  form = document.getElementById('formConfigModal');
-  console.log(form);
+  const olt = await (await fetch(url)).json();
+  console.log(olt);
 
+  document.getElementById('modal-olt-name').value = olt.OltName;
+  document.getElementById('modal-olt-ip').value = olt.ipAddress;
+  document.getElementById('modal-olt-armario').value = olt.Armario;
+  document.getElementById('modal-olt-powerdb').value = olt.PowerdB;
+  document.getElementById('selected-maxclients-value').value = olt.maxClients;
+
+  document.getElementById('formConfigModal').setAttribute("onsubmit",`changeConfigsOLT(event,${olt.id})`);
+  // Analisar forma de dar refresh caso cancele o form
 }
 
 function addAdminOptions() {
